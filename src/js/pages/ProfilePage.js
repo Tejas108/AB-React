@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { UserProfileForm } from 'react-stormpath';
 
 export default class ProfilePage extends React.Component {
+
   render() {
     return (
       <DocumentTitle title={`My Profile`}>
@@ -39,9 +40,9 @@ export default class ProfilePage extends React.Component {
                           </div>
                         </div>
                         <div className="form-group">
-                          <label htmlFor="customData.color" className="col-xs-12 col-sm-4 control-label">Color</label>
+                          <label htmlFor="customData.phone" className="col-xs-12 col-sm-4 control-label">Phone</label>
                           <div className="col-xs-12 col-sm-4">
-                            <input type="customData.color" className="form-control" id="customData.color" name="customData.color" placeholder="Color" />
+                            <input type="customData.phone" className="form-control" id="customData.phone" name="customData.phone" placeholder="Phone" required/>
                           </div>
                         </div>
                         <div className="form-group">

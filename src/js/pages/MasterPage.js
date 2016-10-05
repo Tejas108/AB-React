@@ -8,7 +8,7 @@ import { LoginLink } from 'react-stormpath';
 export default class MasterPage extends React.Component {
   render() {
     return (
-      <DocumentTitle title='Stormpath Express + React Example'>
+      <DocumentTitle title='Stormpath Testing for AB'>
         <div className='MasterPage'>
           <Header />
           { this.props.children }

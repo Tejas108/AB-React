@@ -31,10 +31,12 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use('/css', express.static(__dirname + '/src/css'));
 
+
 app.use(stormpath.init(app, {
   // Disable logging until startup, so that we can catch errors
   // and display them nicely.
-  debug: 'none',
+
+  debug: true,
   web: {
     produces: ['application/json'],
     me: {
@@ -45,11 +47,33 @@ app.use(stormpath.init(app, {
     register: {
       form: {
         fields: {
-          color: {
+          role: {
             enabled: true,
-            label: 'Color',
-            placeholder: 'E.g. blue',
-            type: 'text'
+            label: 'coach',
+            placeholder: 'coach',
+            type: 'text',
+            required: true
+          },
+          phone: {
+            enabled: true,
+            label: 'phone',
+            placeholder: 'phone number',
+            type: 'text',
+            required: false
+          },
+          id: {
+            enabled: true,
+            label: 'coachId',
+            placeholder: 'coachId',
+            type: 'text',
+            required: true
+          },
+          coachId: {
+            enabled: true,
+            label: 'coachId',
+            placeholder: 'coachId',
+            type: 'text',
+            required: true
           }
         }
       }
@@ -60,7 +84,7 @@ app.use(stormpath.init(app, {
 app.post('/me', bodyParser.json(), stormpath.loginRequired, function (req, res) {
   function writeError(message) {
     res.status(400);
-    res.json({ message: message, status: 400 });
+    res.json({message: message, status: 400});
     res.end();
   }
 
@@ -69,8 +93,14 @@ app.post('/me', bodyParser.json(), stormpath.loginRequired, function (req, res) 
     req.user.surname = req.body.surname;
     req.user.email = req.body.email;
 
-    if ('color' in req.body.customData) {
-      req.user.customData.color = req.body.customData.color;
+    if ('phone' in req.body.customData) {
+      req.user.customData.phone = req.body.customData.phone;
+    }
+    if ('role' in req.body.customData) {
+      req.user.customData.role = req.body.customData.role;
+    }
+    if ('id' in req.body.customData) {
+      req.user.customData.id = req.body.customData.id;
     }
 
     req.user.save(function (err) {
@@ -106,7 +136,7 @@ app.get('*', function (req, res) {
 });
 
 spinner.text = 'Starting Dev Sever on port ' + port,
-spinner.start();
+  spinner.start();
 
 app.on('error', failAndExit);
 app.on('stormpath.error', failAndExit);

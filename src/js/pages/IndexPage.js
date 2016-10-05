@@ -13,7 +13,7 @@ export default class IndexPage extends React.Component {
       <div className="container">
         <h2 className="text-center">
           Welcome
-          { this.context.user ? ' ' + this.context.user.givenName : null }!
+          { this.context.user ? ' ' + this.context.user.givenName : null }!<br />
         </h2>
         <hr />
         <div className="jumbotron">

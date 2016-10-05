@@ -1,10 +1,14 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
-
 import { RegistrationForm, LoginLink } from 'react-stormpath';
+import uuid from 'uuid';
+
+let id = uuid.v4();
 
 export default class RegisterPage extends React.Component {
+
   render() {
+    console.log(id);
     return (
       <DocumentTitle title={`Registration`}>
         <div className="container">
@@ -55,9 +59,9 @@ export default class RegisterPage extends React.Component {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="customData.color" className="col-xs-12 col-sm-4 control-label">Color</label>
+                      <label htmlFor="customData.phone" className="col-xs-12 col-sm-4 control-label">Phone</label>
                       <div className="col-xs-12 col-sm-4">
-                        <input type="text" className="form-control" id="customData.color" name="customData.color" placeholder="Color (e.g. blue)" />
+                        <input type="text" className="form-control" id="customData.phone" name="customData.phone" placeholder="Phone" />
                       </div>
                     </div>
 
@@ -78,6 +82,8 @@ export default class RegisterPage extends React.Component {
                 </div>
               </div>
             </div>
+            <input type="hidden" id="customData.role" name="customData.role" value="coach"/>
+            <input type="hidden" id="customData.id" name="customData.id" value={id}/>
           </RegistrationForm>
         </div>
       </DocumentTitle>
