@@ -1,9 +1,8 @@
 {
   "version": "1.0.0",
-  "name": "stormpath-express-react-example",
+  "name": "accountability-buddy",
   "description": "A sample app demonstrating how to integrate Stormpath with React and Express.",
-  "homepage": "https://github.com/stormpath/stormpath-express-react-example",
-  "author": "Stormpath, Inc.",
+  "author": "Tejas Monteverdi <tejas.monteverdi@gmail.com> (http://rainworldinteractive.com)",
   "license": "Apache-2.0",
   "dependencies": {
     "babel-core": "^6.11.4",
