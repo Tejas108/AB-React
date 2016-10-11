@@ -15,7 +15,6 @@ ReactDOM.render(
       <Route path='/register' component={RegisterPage} />
       <Route path='/change' component={ChangePasswordPage} />
       <Route path='/forgot' component={ResetPasswordPage} />
-      {/*<Route path='/newclientsuccess' component={NewClientSuccess} />*/}
       <AuthenticatedRoute>
         <Route path='/dashboard' component={Dashboard} />
         <Route path='/newclient' component={CreateClientPage} />

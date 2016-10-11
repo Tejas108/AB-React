@@ -3,17 +3,54 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var path = require('path');
 var express = require('express');
+var mysql =  require('mysql');
 var webpack = require('webpack');
 var config = require('./webpack.config');
 var ora = require('ora');
-
 var port = process.env.PORT || 3000;
-
 var app = express();
 var compiler = webpack(config);
 
 var spinner = ora({
   interval: 100
+});
+
+var pool      =    mysql.createPool({
+  connectionLimit : 100, //important
+  host     : 'localhost',
+  user     : 'root',
+  password : 'mysql',
+  database : 'accountabilitybuddy',
+  debug    :  true
+});
+
+function handleDatabase(req,res,tbl) {
+
+  pool.getConnection(function(err,connection){
+    if (err) {
+      connection.release();
+      res.json({"code" : 100, "status" : "Error in connection database"});
+      return;
+    }
+
+    console.log('connected as id ' + connection.threadId);
+
+    connection.query('select * from ' + tbl,function(err,rows){
+      connection.release();
+      if(!err) {
+        res.send(rows);
+      }
+    });
+
+    connection.on('error', function(err) {
+      res.json({"code" : 100, "status" : "Error in connection database"});
+      return;
+    });
+  });
+}
+
+app.get("/sessions",function(req,res){
+  handleDatabase(req,res,'sessions');
 });
 
 function failAndExit(err) {
@@ -30,7 +67,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use('/css', express.static(__dirname + '/src/css'));
-
 
 app.use(stormpath.init(app, {
   // Disable logging until startup, so that we can catch errors
@@ -134,6 +170,8 @@ app.post('/me', bodyParser.json(), stormpath.loginRequired, function (req, res) 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'src/html/index.html'));
 });
+
+
 
 spinner.text = 'Starting Dev Sever on port ' + port,
   spinner.start();

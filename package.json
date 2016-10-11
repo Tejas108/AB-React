@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "name": "accountability-buddy",
-  "description": "A sample app demonstrating how to integrate Stormpath with React and Express.",
+  "description": "Accountability Buddy done with React and Stormpath",
   "author": "Tejas Monteverdi <tejas.monteverdi@gmail.com> (http://rainworldinteractive.com)",
   "license": "Apache-2.0",
   "dependencies": {
@@ -18,6 +18,7 @@
     "globals": "^9.9.0",
     "history": "^3.0.0",
     "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
     "ora": "^0.3.0",
     "react": "^15.2.1",
     "react-document-title": "^2.0.2",
@@ -27,7 +28,8 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
-    "webpack-dev-middleware": "^1.6.1"
+    "webpack-dev-middleware": "^1.6.1",
+    "mysql": "^2.11.1"
   },
   "scripts": {
     "start": "node server.js"
